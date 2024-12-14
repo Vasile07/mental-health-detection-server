@@ -76,7 +76,7 @@ def logout(user_id):
     save_measurements(user_id)
     session.pop('user_id', None)
     if user_id in threads:
-        threads[user_id].stop()
+        threads[user_id]._stop()
     return jsonify({"message": f"User {user_id} logged out"})
 
 
@@ -126,8 +126,9 @@ def get_prediction(user_id):
         reshape_data(temp[-consecutive_timeline:]),
     ]
 
-    prediction = model.predict(input_data)
-    predicted_class = reverse_mapping[prediction]
+    prediction = model.predict(input_data)[-1]
+    max_index = np.argmax(prediction)
+    predicted_class = reverse_mapping[max_index]
 
     return jsonify({'user_id': user_id, 'prediction': predicted_class})
 
