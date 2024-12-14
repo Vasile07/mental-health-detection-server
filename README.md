@@ -3,7 +3,7 @@
 ## Starting the Server
 To run the server, execute the following command:
 ```
-python3.exe main.py
+python.exe main.py
 ```
 
 ## API Endpoints 🔹🔚
